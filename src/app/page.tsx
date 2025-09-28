@@ -1,103 +1,59 @@
-import Image from "next/image";
+'use client'
+
+import { useState } from 'react'
+import p_1_photo from '../../public/assets/photos/1/p_source.png'
+import v_1_photo from '../../public/assets/photos/1/v_source.jpg'
+import { Comparison } from '@/components/comparison'
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [selectedImage, setSelectedImage] = useState('slika-1')
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const handleImageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedImage(event.target.value)
+  }
+
+  return (
+    <div className="min-h-dvh bg-gradient-to-br from-25% to-95% from-[#ffffff] to-[#fff9d9] overflow-x-hidden">
+      <header className="flex items-center justify-between border-black/10 border-b px-3 py-2 lg:px-5">
+        <div>🌓</div>
+        <label htmlFor="slika" className="sr-only">
+          Slika
+        </label>
+        <div className="grid grid-cols-1">
+          <select
+            id="slika"
+            name="slika"
+            value={selectedImage}
+            onChange={handleImageChange}
+            className="-outline-offset focus-visible:-outline-offset-2 col-start-1 row-start-1 w-full appearance-none py-1.5 pr-10 pl-3 text-gray-900 text-base outline-1 outline-gray-200"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+            <option value="slika-1">Slika 1</option>
+            <option value="slika-2">Slika 2</option>
+            <option value="slika-3">Slika 3</option>
+            <option value="slika-4">Slika 4</option>
+            <option value="slika-5">Slika 5</option>
+            <option value="slika-6">Slika 6</option>
+            <option value="slika-7">Slika 7</option>
+            <option value="slika-8">Slika 8</option>
+            <option value="slika-9">Slika 9</option>
+          </select>
+          <svg
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            data-slot="icon"
+            aria-hidden="true"
+            className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-300 sm:size-4 dark:text-gray-400"
+          >
+            <path
+              d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+              clipRule="evenodd"
+              fillRule="evenodd"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </svg>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </header>
+
+      <Comparison pPhoto={p_1_photo} vPhoto={v_1_photo} />
     </div>
-  );
+  )
 }
