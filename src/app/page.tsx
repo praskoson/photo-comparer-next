@@ -1,19 +1,19 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import p_1_photo from '../../public/assets/photos/1/p_source.png'
-import v_1_photo from '../../public/assets/photos/1/v_source.jpg'
-import { Comparison } from '@/components/comparison'
+import { useState } from "react";
+import { Comparison } from "@/components/comparison";
+import p_1_photo from "../../public/assets/photos/1/p_source.png";
+import v_1_photo from "../../public/assets/photos/1/v_source.jpg";
 
 export default function Home() {
-  const [selectedImage, setSelectedImage] = useState('slika-1')
+  const [selectedImage, setSelectedImage] = useState("slika-1");
 
   const handleImageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedImage(event.target.value)
-  }
+    setSelectedImage(event.target.value);
+  };
 
   return (
-    <div className="min-h-dvh bg-gradient-to-br from-25% to-95% from-[#ffffff] to-[#fff9d9] overflow-x-hidden">
+    <div className="min-h-dvh overflow-x-hidden bg-gradient-to-br from-25% from-[#ffffff] to-95% to-[#fff9d9]">
       <header className="flex items-center justify-between border-black/10 border-b px-3 py-2 lg:px-5">
         <div>🌓</div>
         <label htmlFor="slika" className="sr-only">
@@ -25,7 +25,7 @@ export default function Home() {
             name="slika"
             value={selectedImage}
             onChange={handleImageChange}
-            className="-outline-offset focus-visible:-outline-offset-2 col-start-1 row-start-1 w-full appearance-none py-1.5 pr-10 pl-3 text-gray-900 text-base outline-1 outline-gray-200"
+            className="-outline-offset focus-visible:-outline-offset-2 col-start-1 row-start-1 w-full appearance-none py-1.5 pr-10 pl-3 text-base text-gray-900 outline-1 outline-gray-200"
           >
             <option value="slika-1">Slika 1</option>
             <option value="slika-2">Slika 2</option>
@@ -55,5 +55,5 @@ export default function Home() {
 
       <Comparison pPhoto={p_1_photo} vPhoto={v_1_photo} />
     </div>
-  )
+  );
 }

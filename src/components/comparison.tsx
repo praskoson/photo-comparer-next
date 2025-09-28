@@ -1,11 +1,11 @@
-import Image, { type StaticImageData } from 'next/image'
-import { useCallback, useRef, useState } from 'react'
 import {
   motion,
   useMotionTemplate,
   useMotionValue,
   useTransform,
 } from 'motion/react'
+import Image, { type StaticImageData } from 'next/image'
+import { useCallback, useRef, useState } from 'react'
 
 export function Comparison({
   pPhoto,
@@ -41,22 +41,32 @@ export function Comparison({
       ref={setRef}
       data-ready={ready}
       dragMomentum={false}
-      className="my-4 group relative w-full"
+      className="group relative my-4 w-full"
     >
-      <div className="group-data-[ready=false]:block hidden">Učitavanje...</div>
-      <Image
-        src={pPhoto}
-        alt="iphone_12_photo"
-        className="group-data-[ready=false]:invisible block w-full h-auto"
-        onLoad={() => setHasLoadedP(true)}
-      />
-      <motion.div className="absolute inset-0" style={{ clipPath }}>
+      <div className="hidden group-data-[ready=false]:block">Učitavanje...</div>
+
+      <div className="relative block">
+        <Image
+          src={pPhoto}
+          alt="iphone_12_photo"
+          className="block h-auto w-full group-data-[ready=false]:invisible"
+          onLoad={() => setHasLoadedP(true)}
+        />
+        <div className="absolute right-3 bottom-3 select-none bg-black/60 px-3 py-2 text-white backdrop-blur-md">
+          <span className="font-semibold text-sm/6">iPhone 12</span>
+        </div>
+      </div>
+
+      <motion.div className="absolute inset-0 isolate" style={{ clipPath }}>
         <Image
           src={vPhoto}
           alt="s23_ultra_photo"
-          className="absolute inset-0 group-data-[ready=false]:invisible block w-full h-auto"
+          className="absolute inset-0 block h-auto w-full group-data-[ready=false]:invisible"
           onLoad={() => setHasLoadedV(true)}
         />
+        <div className="absolute bottom-3 left-3 select-none bg-black/60 px-3 py-2 text-white backdrop-blur-md">
+          <span className="font-semibold text-sm/6">S23 Ultra</span>
+        </div>
       </motion.div>
 
       <motion.button
@@ -66,10 +76,10 @@ export function Comparison({
         }}
         dragMomentum={false}
         dragConstraints={constraintsRef}
-        className="group-data-[ready=false]:hidden block absolute inset-y-0 inset-x-0 w-4 cursor-ew-resize"
+        className="absolute inset-x-0 inset-y-0 block w-4 cursor-ew-resize group-data-[ready=false]:hidden"
         style={{ left: '50%' }}
       >
-        <div className="h-full bg-white/10 hover:bg-white/20 w-2.5 backdrop-blur-[4px]" />
+        <div className="h-full w-2.5 bg-white/10 backdrop-blur-[4px] hover:bg-white/20" />
       </motion.button>
     </motion.div>
   )
