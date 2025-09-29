@@ -14,6 +14,7 @@ export default function Home() {
   };
 
   const sourcePhotos = getSourcePhotos(photo);
+  const imageKey = `${sourcePhotos.pSource.src}-${sourcePhotos.vSource.src}`;
 
   return (
     <div className="flex h-dvh flex-col overflow-x-hidden bg-gradient-to-br from-25% from-[#ffffff] to-95% to-[#fff9d9]">
@@ -58,6 +59,7 @@ export default function Home() {
       </header>
 
       <Comparison
+        key={imageKey}
         pSource={sourcePhotos.pSource}
         vSource={sourcePhotos.vSource}
         pCropped={sourcePhotos.pCropped}
