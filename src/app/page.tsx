@@ -1,11 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import { Comparison } from '@/components/comparison'
-import p_1_photo from '../../public/assets/photos/1/p_source.png'
-import v_1_photo from '../../public/assets/photos/1/v_source.jpg'
 import { parseAsInteger, useQueryState } from 'nuqs'
-import { getSourcePhotos } from '@/lib/get-photos'
+import { getSourcePhotos } from '@/app/get-photos'
 
 export default function Home() {
   const [photo, setPhoto] = useQueryState<number>(
