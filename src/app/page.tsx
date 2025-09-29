@@ -1,19 +1,25 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { Comparison } from "@/components/comparison";
-import p_1_photo from "../../public/assets/photos/1/p_source.png";
-import v_1_photo from "../../public/assets/photos/1/v_source.jpg";
+import { useState } from 'react'
+import { Comparison } from '@/components/comparison'
+import p_1_photo from '../../public/assets/photos/1/p_source.png'
+import v_1_photo from '../../public/assets/photos/1/v_source.jpg'
+import { parseAsInteger, useQueryState } from 'nuqs'
+import { getSourcePhotos } from '@/lib/get-photos'
 
 export default function Home() {
-  const [selectedImage, setSelectedImage] = useState("slika-1");
-
+  const [photo, setPhoto] = useQueryState<number>(
+    'photo',
+    parseAsInteger.withDefault(1),
+  )
   const handleImageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedImage(event.target.value);
-  };
+    setPhoto(Number(event.target.value))
+  }
+
+  const sourcePhotos = getSourcePhotos(photo)
 
   return (
-    <div className="min-h-dvh overflow-x-hidden bg-gradient-to-br from-25% from-[#ffffff] to-95% to-[#fff9d9]">
+    <div className="h-dvh overflow-x-hidden bg-gradient-to-br from-25% from-[#ffffff] to-95% to-[#fff9d9] flex flex-col">
       <header className="flex items-center justify-between border-black/10 border-b px-3 py-2 lg:px-5">
         <div>🌓</div>
         <label htmlFor="slika" className="sr-only">
@@ -23,19 +29,20 @@ export default function Home() {
           <select
             id="slika"
             name="slika"
-            value={selectedImage}
+            value={photo}
             onChange={handleImageChange}
             className="-outline-offset focus-visible:-outline-offset-2 col-start-1 row-start-1 w-full appearance-none py-1.5 pr-10 pl-3 text-base text-gray-900 outline-1 outline-gray-200"
           >
-            <option value="slika-1">Slika 1</option>
-            <option value="slika-2">Slika 2</option>
-            <option value="slika-3">Slika 3</option>
-            <option value="slika-4">Slika 4</option>
-            <option value="slika-5">Slika 5</option>
-            <option value="slika-6">Slika 6</option>
-            <option value="slika-7">Slika 7</option>
-            <option value="slika-8">Slika 8</option>
-            <option value="slika-9">Slika 9</option>
+            <option value="1">Slika 1</option>
+            <option value="2">Slika 2</option>
+            <option value="3">Slika 3</option>
+            <option value="4">Slika 4</option>
+            <option value="5">Slika 5</option>
+            <option value="6">Slika 6</option>
+            <option value="7">Slika 7</option>
+            <option value="8">Slika 8</option>
+            <option value="9">Slika 9</option>
+            <option value="10">Slika 10</option>
           </select>
           <svg
             viewBox="0 0 16 16"
@@ -53,7 +60,12 @@ export default function Home() {
         </div>
       </header>
 
-      <Comparison pPhoto={p_1_photo} vPhoto={v_1_photo} />
+      <Comparison
+        pSource={sourcePhotos.pSource}
+        vSource={sourcePhotos.vSource}
+        pCropped={sourcePhotos.pCropped}
+        vCropped={sourcePhotos.vCropped}
+      />
     </div>
-  );
+  )
 }

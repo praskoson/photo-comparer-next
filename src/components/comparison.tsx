@@ -8,11 +8,15 @@ import Image, { type StaticImageData } from 'next/image'
 import { useCallback, useRef, useState } from 'react'
 
 export function Comparison({
-  pPhoto,
-  vPhoto,
+  pSource,
+  vSource,
+  pCropped,
+  vCropped,
 }: {
-  pPhoto: StaticImageData
-  vPhoto: StaticImageData
+  pSource: StaticImageData
+  vSource: StaticImageData
+  pCropped: StaticImageData | undefined
+  vCropped: StaticImageData | undefined
 }) {
   const constraintsRef = useRef<HTMLDivElement>(null)
   const [hasLoadedP, setHasLoadedP] = useState(false)
@@ -47,25 +51,29 @@ export function Comparison({
 
       <div className="relative block">
         <Image
-          src={pPhoto}
+          src={pCropped ?? pSource}
           alt="iphone_12_photo"
           className="block h-auto w-full group-data-[ready=false]:invisible"
           onLoad={() => setHasLoadedP(true)}
         />
-        <div className="absolute right-3 bottom-3 select-none bg-black/60 px-3 py-2 text-white backdrop-blur-md">
-          <span className="font-semibold text-sm/6">iPhone 12</span>
+        <div className="absolute right-3 bottom-3 select-none bg-black/60 px-3 py-1 lg:py-2 text-white backdrop-blur-md">
+          <span className="font-semibold text-sm/6">
+            iPhone 12 {pCropped ? ' (Crop)' : ''}
+          </span>
         </div>
       </div>
 
       <motion.div className="absolute inset-0 isolate" style={{ clipPath }}>
         <Image
-          src={vPhoto}
+          src={vCropped ?? vSource}
           alt="s23_ultra_photo"
           className="absolute inset-0 block h-auto w-full group-data-[ready=false]:invisible"
           onLoad={() => setHasLoadedV(true)}
         />
-        <div className="absolute bottom-3 left-3 select-none bg-black/60 px-3 py-2 text-white backdrop-blur-md">
-          <span className="font-semibold text-sm/6">S23 Ultra</span>
+        <div className="absolute bottom-3 left-3 select-none bg-black/60 px-3 py-1 lg:py-2 text-white backdrop-blur-md">
+          <span className="font-semibold text-sm/6">
+            S23 Ultra {vCropped ? ' (Crop)' : ''}
+          </span>
         </div>
       </motion.div>
 
