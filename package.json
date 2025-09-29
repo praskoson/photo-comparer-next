@@ -11,6 +11,7 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "motion": "^12.23.22",
     "next": "15.5.4",
     "nuqs": "^2.6.0",

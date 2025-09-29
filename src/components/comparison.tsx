@@ -7,6 +7,7 @@ import {
 import Image, { type StaticImageData } from "next/image";
 import { useCallback, useRef, useState } from "react";
 import { GripVerticalIcon } from "./svg";
+import clsx from "clsx";
 
 export function Comparison({
   pSource,
@@ -57,11 +58,9 @@ export function Comparison({
           className="block h-auto w-full group-data-[ready=false]:invisible"
           onLoad={() => setHasLoadedP(true)}
         />
-        <div className="absolute right-3 bottom-3 select-none bg-black/60 px-3 py-1 text-white backdrop-blur-md lg:py-2">
-          <span className="font-semibold text-sm/6">
-            iPhone 12 {pCropped ? " (Crop)" : ""}
-          </span>
-        </div>
+        <PhoneLabel className="right-3">
+          iPhone 12 {pCropped ? " (Crop)" : ""}
+        </PhoneLabel>
       </div>
 
       <motion.div className="absolute inset-0 isolate" style={{ clipPath }}>
@@ -71,11 +70,9 @@ export function Comparison({
           className="absolute inset-0 block h-auto w-full group-data-[ready=false]:invisible"
           onLoad={() => setHasLoadedV(true)}
         />
-        <div className="absolute bottom-3 left-3 select-none bg-black/60 px-3 py-1 text-white backdrop-blur-md lg:py-2">
-          <span className="font-semibold text-sm/6">
-            S23 Ultra {vCropped ? " (Crop)" : ""}
-          </span>
-        </div>
+        <PhoneLabel className="left-3">
+          S23 Ultra {vCropped ? " (Crop)" : ""}
+        </PhoneLabel>
       </motion.div>
 
       <motion.button
@@ -93,5 +90,24 @@ export function Comparison({
         </div>
       </motion.button>
     </motion.div>
+  );
+}
+
+function PhoneLabel({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={clsx(
+        "group-data-[ready=false]:invisible absolute bottom-3 select-none bg-black/60 px-3 py-1 text-white backdrop-blur-md lg:py-2",
+        className,
+      )}
+    >
+      <span className="font-semibold text-sm/6">{children}</span>
+    </div>
   );
 }
