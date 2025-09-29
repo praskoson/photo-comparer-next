@@ -6,6 +6,7 @@ import {
 } from "motion/react";
 import Image, { type StaticImageData } from "next/image";
 import { useCallback, useRef, useState } from "react";
+import { GripVerticalIcon } from "./svg";
 
 export function Comparison({
   pSource,
@@ -84,10 +85,12 @@ export function Comparison({
         }}
         dragMomentum={false}
         dragConstraints={constraintsRef}
-        className="absolute inset-x-0 inset-y-0 block w-4 cursor-ew-resize group-data-[ready=false]:hidden"
-        style={{ left: "50%" }}
+        className="absolute inset-x-0 inset-y-0 block w-11 cursor-ew-resize group-data-[ready=false]:hidden"
+        style={{ left: "calc(50% - 22px)" }}
       >
-        <div className="h-full w-2.5 bg-white/10 backdrop-blur-[4px] hover:bg-white/20" />
+        <div className="mx-auto h-full w-2.5 bg-white/10 backdrop-blur-[4px] hover:bg-white/20 flex flex-col justify-center">
+          <GripVerticalIcon className="opacity-75 text-white" />
+        </div>
       </motion.button>
     </motion.div>
   );
