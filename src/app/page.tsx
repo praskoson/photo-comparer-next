@@ -1,22 +1,22 @@
-'use client'
+"use client";
 
-import { Comparison } from '@/components/comparison'
-import { parseAsInteger, useQueryState } from 'nuqs'
-import { getSourcePhotos } from '@/app/get-photos'
+import { parseAsInteger, useQueryState } from "nuqs";
+import { getSourcePhotos } from "@/app/get-photos";
+import { Comparison } from "@/components/comparison";
 
 export default function Home() {
   const [photo, setPhoto] = useQueryState<number>(
-    'photo',
+    "photo",
     parseAsInteger.withDefault(1),
-  )
+  );
   const handleImageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setPhoto(Number(event.target.value))
-  }
+    setPhoto(Number(event.target.value));
+  };
 
-  const sourcePhotos = getSourcePhotos(photo)
+  const sourcePhotos = getSourcePhotos(photo);
 
   return (
-    <div className="h-dvh overflow-x-hidden bg-gradient-to-br from-25% from-[#ffffff] to-95% to-[#fff9d9] flex flex-col">
+    <div className="flex h-dvh flex-col overflow-x-hidden bg-gradient-to-br from-25% from-[#ffffff] to-95% to-[#fff9d9]">
       <header className="flex items-center justify-between border-black/10 border-b px-3 py-2 lg:px-5">
         <div>🌓</div>
         <label htmlFor="slika" className="sr-only">
@@ -64,5 +64,5 @@ export default function Home() {
         vCropped={sourcePhotos.vCropped}
       />
     </div>
-  )
+  );
 }
