@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import {
   motion,
   useMotionTemplate,
@@ -7,7 +8,6 @@ import {
 import Image, { type StaticImageData } from "next/image";
 import { useCallback, useRef, useState } from "react";
 import { GripVerticalIcon } from "./svg";
-import clsx from "clsx";
 
 export function Comparison({
   pSource,
@@ -85,8 +85,8 @@ export function Comparison({
         className="absolute inset-x-0 inset-y-0 block w-11 cursor-ew-resize group-data-[ready=false]:hidden"
         style={{ left: "calc(50% - 22px)" }}
       >
-        <div className="mx-auto h-full w-2.5 bg-white/10 backdrop-blur-[4px] hover:bg-white/20 flex flex-col justify-center">
-          <GripVerticalIcon className="opacity-75 text-white" />
+        <div className="mx-auto flex h-full w-2.5 flex-col justify-center bg-white/10 backdrop-blur-[4px] hover:bg-white/20">
+          <GripVerticalIcon className="text-white opacity-75" />
         </div>
       </motion.button>
     </motion.div>
@@ -103,7 +103,7 @@ function PhoneLabel({
   return (
     <div
       className={clsx(
-        "group-data-[ready=false]:invisible absolute bottom-3 select-none bg-black/60 px-3 py-1 text-white backdrop-blur-md lg:py-2",
+        "absolute bottom-3 select-none bg-black/60 px-3 py-1 text-white backdrop-blur-md group-data-[ready=false]:invisible lg:py-2",
         className,
       )}
     >
