@@ -32,8 +32,14 @@ export function Comparison({
       : ["inset(0% 0% 100% 0%)", "inset(0% 0% 0% 0%)"],
   );
 
-  const width = Math.min((pCropped ?? pSource).width);
-  const height = Math.min((pCropped ?? pSource).height);
+  const width = Math.min(
+    (pCropped ?? pSource).width,
+    (vCropped ?? vSource).width,
+  );
+  const height = Math.min(
+    (pCropped ?? pSource).height,
+    (vCropped ?? vSource).height,
+  );
   const aspectRatio = width / height;
   const ready = hasLoadedP && hasLoadedV;
 
