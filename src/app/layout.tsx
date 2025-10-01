@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Usporedbe slika",
-  description: "Usporedbe slicnih slika sa dva mobitela",
+  description: "Sraz slicnih slika",
 };
 
 export const viewport: Viewport = {
