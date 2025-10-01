@@ -92,9 +92,9 @@ export function PlusGridIcon({
       )}
     >
       {placement === "top left" ? (
-        <path d="M7 15H8V7H15V8H7V15Z" />
+        <path d="M7 15H8V8H15V7H7Z" />
       ) : placement === "top right" ? (
-        <path d="M8 15H7V7H0V8H8V15Z" />
+        <path d="M8 15H7V8H0V7H8Z" />
       ) : placement === "bottom left" ? (
         <path d="M7 0H8V7H15V8H7V0Z" />
       ) : (
@@ -103,6 +103,3 @@ export function PlusGridIcon({
     </svg>
   );
 }
-
-// M715H8V7H15V8H7V15Z
-// M7  0H8V7H15V8H7V0 Z

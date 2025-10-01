@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { motion } from "motion/react";
 
 export function NavButton({
   children,
@@ -12,15 +13,16 @@ export function NavButton({
   label?: string;
 }) {
   return (
-    <button
+    <motion.button
       aria-label={label}
       onClick={onClick}
+      whileTap={{ scale: 0.95 }}
       className={clsx(
-        "block size-full transition-[scale] duration-1000 hover:bg-white/15 active:scale-[0.97]",
+        "block size-full transition-[scale] duration-1000 hover:bg-white/15",
         className,
       )}
     >
       {children}
-    </button>
+    </motion.button>
   );
 }

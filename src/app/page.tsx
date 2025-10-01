@@ -10,13 +10,14 @@ import {
 } from "@/components/grid-container";
 import { NavButton } from "@/components/nav-button";
 import { Columns2Icon, Rows2Icon } from "@/components/svg";
+import clsx from "clsx";
 
-const modes = ["comparison", "grid"] as const;
+const modes = ["horizontal", "vertical"] as const;
 
 export default function Home() {
   const [mode, setMode] = useQueryState<(typeof modes)[number]>(
     "mode",
-    parseAsStringLiteral(modes).withDefault("comparison"),
+    parseAsStringLiteral(modes).withDefault("horizontal"),
   );
   const [photo, setPhoto] = useQueryState<number>(
     "photo",
@@ -27,33 +28,40 @@ export default function Home() {
   };
 
   const sourcePhotos = getSourcePhotos(photo);
-  const imageKey = `${sourcePhotos.pSource.src}-${sourcePhotos.vSource.src}`;
+  const imageKey = `${sourcePhotos.pSource.src}-${sourcePhotos.vSource.src}-${mode}`;
 
   return (
-    <div className="flex h-dvh flex-col overflow-x-hidden bg-gradient-to-b from-25% from-[#ffffff] to-95% to-[#fff9d9]">
+    <div
+      className={clsx(
+        // base
+        "overflow-x-hidden bg-gradient-to-b from-25% from-[#ffffff] to-95% to-[#fff9d9]",
+        // mobile
+        "h-screen pb-2",
+      )}
+    >
       <GridContainer>
-        <GridRow className="relative flex justify-between px-1.5">
+        <GridRow className="relative flex justify-between px-1.5 md:px-4">
           <PlusGridItem>
-            <div aria-hidden="true" className="logo"></div>
+            <div aria-hidden="true" className="logo" />
           </PlusGridItem>
-          <div className="ml-auto flex gap-x-2">
+          <div className="ml-auto flex gap-x-2 md:gap-x-4">
             <PlusGridItem
-              selected={mode === "comparison"}
+              selected={mode === "horizontal"}
               className="group w-12 data-selected:fill-blue-500 md:w-20"
             >
               <NavButton
-                onClick={() => setMode("comparison")}
+                onClick={() => setMode("horizontal")}
                 label="Comparison View"
               >
                 <Columns2Icon className="mx-auto size-5 text-neutral-400 group-data-[selected]:text-blue-500" />
               </NavButton>
             </PlusGridItem>
             <PlusGridItem
-              selected={mode === "grid"}
+              selected={mode === "vertical"}
               className="group w-12 data-selected:fill-blue-500 md:w-20"
             >
               <NavButton
-                onClick={() => setMode("grid")}
+                onClick={() => setMode("vertical")}
                 label="Comparison View"
               >
                 <Rows2Icon className="mx-auto size-5 text-neutral-400 group-data-[selected]:text-blue-500" />
@@ -105,6 +113,7 @@ export default function Home() {
         vSource={sourcePhotos.vSource}
         pCropped={sourcePhotos.pCropped}
         vCropped={sourcePhotos.vCropped}
+        orientation={mode}
       />
     </div>
   );
