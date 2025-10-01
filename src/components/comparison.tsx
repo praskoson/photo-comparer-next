@@ -202,6 +202,7 @@ function PhoneLabel({
           <Dialog close={() => setIsOpen(false)}>
             <h2 className="sr-only">Source photo</h2>
             <Image
+              placeholder="blur"
               className="size-full object-contain"
               src={photo}
               alt="Source photo"
