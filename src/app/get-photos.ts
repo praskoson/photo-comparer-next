@@ -3,6 +3,7 @@ import p_1_photo from "../../public/assets/photos/1/p_source.png";
 import v_1_photo from "../../public/assets/photos/1/v_source.jpg";
 import p_2_photo from "../../public/assets/photos/2/p_cropped.png";
 import p_2_source from "../../public/assets/photos/2/p_source.png";
+import v_2_source from "../../public/assets/photos/2/v_source.jpg";
 import p_3_photo from "../../public/assets/photos/3/p_source.png";
 import p_4_photo from "../../public/assets/photos/4/p_source.png";
 import v_4_photo from "../../public/assets/photos/4/v_source.jpg";
@@ -38,7 +39,7 @@ export function getSourcePhotos(index: number): {
       return {
         pCropped: p_2_photo,
         pSource: p_2_source,
-        vSource: p_2_source,
+        vSource: v_2_source,
       };
     case 3:
       return {
