@@ -14,12 +14,17 @@ body {
   isolation: isolate;
   width: 45px;
   height: 36px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-items: center;
 }
 
 .logo::before {
-  position: absolute;
-  top: 8%;
-  left: 32%;
+  translate: 25% -20%;
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
   content: "";
   height: 20px;
   width: 20px;
@@ -34,9 +39,9 @@ body {
 }
 
 .logo::after {
-  position: absolute;
-  left: 13%;
-  top: 34%;
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
+  translate: -25% 20%;
   content: "";
   height: 20px;
   width: 20px;
