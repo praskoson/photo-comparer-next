@@ -10,7 +10,6 @@ import {
 } from "@/components/grid-container";
 import { NavButton } from "@/components/nav-button";
 import { Columns2Icon, Rows2Icon } from "@/components/svg";
-import clsx from "clsx";
 
 const modes = ["horizontal", "vertical"] as const;
 
@@ -31,14 +30,7 @@ export default function Home() {
   const imageKey = `${sourcePhotos.pSource.src}-${sourcePhotos.vSource.src}-${mode}`;
 
   return (
-    <div
-      className={clsx(
-        // base
-        "overflow-x-hidden bg-gradient-to-b from-25% from-[#ffffff] to-95% to-[#fff9d9]",
-        // mobile
-        "h-screen pb-2",
-      )}
-    >
+    <div className="h-dvh pb-2 overflow-x-hidden bg-gradient-to-b from-25% from-[#ffffff] to-95% to-[#fff9d9]">
       <GridContainer>
         <GridRow className="relative flex justify-between px-1.5 md:px-4">
           <PlusGridItem>

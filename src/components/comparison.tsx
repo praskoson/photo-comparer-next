@@ -54,7 +54,7 @@ export function Comparison({
   }, [constraintsRef, orientation]);
 
   return (
-    <div className="h-[calc(100vh-54px-8px)] overflow-hidden">
+    <div className="h-[calc(100dvh-54px-8px)] overflow-hidden">
       <motion.div
         ref={constraintsRef}
         style={{ aspectRatio }}
@@ -103,7 +103,7 @@ export function Comparison({
           <Image
             src={vCropped ?? vSource}
             alt="s23_ultra_photo"
-            className="w-full h-full object-contain group-data-[ready=false]:invisible"
+            className="size-full object-contain group-data-[ready=false]:invisible"
             onLoad={() => setHasLoadedV(true)}
           />
           <PhoneLabel
