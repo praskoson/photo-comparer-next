@@ -54,7 +54,7 @@ export function Comparison({
   }, [constraintsRef, orientation]);
 
   return (
-    <div className="h-[calc(100dvh-54px-8px)] overflow-hidden">
+    <div className="h-[calc(100dvh-54px-8px)] min-h-[260px] overflow-hidden px-1 md:px-4">
       <motion.div
         ref={constraintsRef}
         style={{ aspectRatio }}
@@ -81,7 +81,7 @@ export function Comparison({
             duration: 6,
             repeatType: "loop",
           }}
-          className="group-data-[ready=true]:hidden absolute inset-1 border-(--pattern-fg) border bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:24px_24px] bg-fixed [--pattern-fg:var(--color-gray-950)]/5"
+          className="group-data-[ready=true]:hidden absolute inset-0 border-(--pattern-fg) border bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:24px_24px] bg-fixed [--pattern-fg:var(--color-gray-950)]/5"
         />
 
         {/* Images */}

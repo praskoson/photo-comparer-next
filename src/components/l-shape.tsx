@@ -17,10 +17,10 @@ export function LShape({
       aria-hidden="true"
       strokeWidth={2}
       className={clsx(
-        className,
-        "absolute size-5 md:size-7 fill-zinc-500",
+        "absolute size-5 md:size-7 fill-zinc-300",
         yClass,
         xClass,
+        className,
       )}
     >
       {placement === "top left" ? (
