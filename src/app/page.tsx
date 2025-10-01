@@ -62,13 +62,13 @@ export default function Home() {
             <label htmlFor="slika" className="sr-only">
               Slika
             </label>
-            <PlusGridItem className="grid grid-cols-1">
+            <PlusGridItem className="grid grid-cols-1 focus-within:fill-blue-500">
               <select
                 id="slika"
                 name="slika"
                 value={photo}
                 onChange={handleImageChange}
-                className="col-start-1 row-start-1 w-full appearance-none py-1.5 pr-10 pl-3 text-base text-neutral-600"
+                className="col-start-1 row-start-1 w-full appearance-none py-1.5 pr-10 pl-3 text-base text-neutral-600 focus:outline-none"
               >
                 <option value="1">Slika 1</option>
                 <option value="2">Slika 2</option>
