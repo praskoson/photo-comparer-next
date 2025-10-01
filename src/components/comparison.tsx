@@ -230,9 +230,7 @@ function Dialog({
    */
   useEffect(() => {
     if (!ref.current) return;
-
     ref.current.showModal();
-
     return () => ref.current?.close();
   }, [ref]);
 
