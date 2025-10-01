@@ -134,8 +134,8 @@ export function Comparison({
           className={clsx(
             "absolute block group-data-[ready=false]:hidden",
             orientation === "horizontal"
-              ? "cursor-ew-resize w-10 inset-y-0"
-              : "cursor-ns-resize h-10 inset-x-0 flex flex-col",
+              ? "cursor-ew-resize w-2.5 inset-y-0"
+              : "cursor-ns-resize h-2.5 inset-x-0 flex flex-col",
           )}
           style={
             orientation === "horizontal"
@@ -143,12 +143,19 @@ export function Comparison({
               : { y: x, top: "50%", transform: "translateY(-50%)" }
           }
         >
+          {/* Touch target expander */}
+          <div
+            aria-hidden="true"
+            className="absolute top-1/2 left-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 pointer-fine:hidden"
+          />
+
+          {/* Visual grab handle */}
           <div
             className={clsx(
               "flex justify-center bg-white/10 backdrop-blur-[4px] hover:bg-white/20",
               orientation === "horizontal"
-                ? "flex-col w-2.5 h-full"
-                : "flex-row h-2.5 w-full",
+                ? "flex-col size-full"
+                : "flex-row size-full",
             )}
           >
             {orientation === "horizontal" ? (
