@@ -1,9 +1,20 @@
 import clsx from "clsx";
-import { motion, useMotionValue, useTransform } from "motion/react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useTransform,
+} from "motion/react";
 import Image, { type StaticImageData } from "next/image";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { LShape } from "./l-shape";
-import { GripHorizontalIcon, GripVerticalIcon } from "./svg";
+import {
+  ArrowsPointingOutIcon,
+  GripHorizontalIcon,
+  GripVerticalIcon,
+  XMarkIcon,
+} from "./svg";
+import { useClickOutside } from "@/lib/hooks";
 
 export function Comparison({
   pSource,
@@ -92,7 +103,7 @@ export function Comparison({
             className="size-full object-contain group-data-[ready=false]:invisible"
             onLoad={() => setHasLoadedP(true)}
           />
-          <PhoneLabel className="bottom-3 right-3">
+          <PhoneLabel photo={pSource} className="bottom-3 right-3">
             iPhone 12 {pCropped ? " (Crop)" : ""}
           </PhoneLabel>
         </div>
@@ -107,6 +118,7 @@ export function Comparison({
             onLoad={() => setHasLoadedV(true)}
           />
           <PhoneLabel
+            photo={vSource}
             className={
               orientation === "horizontal" ? "bottom-3 left-3" : "top-3 right-3"
             }
@@ -154,20 +166,103 @@ export function Comparison({
 function PhoneLabel({
   children,
   className,
+  photo,
 }: {
   children: React.ReactNode;
   className?: string;
+  photo: StaticImageData;
 }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div
-      className={clsx(
-        "absolute px-2 py-1 group-data-[ready=false]:invisible md:px-3 md:py-2",
-        "flex items-center select-none",
-        "border-[0.5px] border-white/[0.05] backdrop-blur-md bg-black/30 text-white",
-        className,
-      )}
-    >
-      <span className="font-semibold text-xs md:text-sm/6">{children}</span>
-    </div>
+    <>
+      <motion.button
+        onClick={() => setIsOpen(true)}
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.97 }}
+        className={clsx(
+          "absolute px-2 py-1 group-data-[ready=false]:invisible md:px-3 md:py-2",
+          "flex items-center select-none gap-x-2",
+          "border-[0.5px] border-white/[0.05] backdrop-blur-md bg-black/30 text-white",
+          className,
+        )}
+      >
+        <ArrowsPointingOutIcon className="text-white size-4" />
+        <span className="font-semibold text-xs md:text-sm/6">{children}</span>
+      </motion.button>
+      <AnimatePresence>
+        {isOpen ? (
+          <Dialog close={() => setIsOpen(false)}>
+            <h2 className="sr-only">Source photo</h2>
+            <Image
+              className="size-full object-contain"
+              src={photo}
+              alt="Source photo"
+            />
+          </Dialog>
+        ) : null}
+      </AnimatePresence>
+    </>
+  );
+}
+
+function Dialog({
+  close,
+  children,
+}: {
+  close: () => void;
+  children: React.ReactNode;
+}) {
+  const ref = useRef<HTMLDialogElement>(null);
+
+  /**
+   * Use the dialog element's imperative API to open and close the dialog
+   * when the component mounts and unmounts. This enables exit animations
+   * and maintains the dialog's natural accessibility behaviour.
+   */
+  useEffect(() => {
+    if (!ref.current) return;
+
+    ref.current.showModal();
+
+    return () => ref.current?.close();
+  }, [ref]);
+
+  useClickOutside(ref, close);
+
+  return (
+    <>
+      <motion.div
+        className="bg-black/65 fixed inset-0 z-[9999] backdrop-blur-xl"
+        transition={{ duration: 0.14 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      />
+      <motion.dialog
+        ref={ref}
+        className="z-[10000] isolate  rounded-2xl relative inset-[20px] backdrop:hidden size-full bg-black focus:outline-none"
+        open={false}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onCancel={(event) => {
+          event.preventDefault();
+          close();
+        }}
+        onClose={close}
+      >
+        <div className="absolute top-4 right-4">
+          <button
+            onClick={close}
+            aria-label="Close"
+            className="z-10 focus:outline-none bg-white/10 backdrop-blur-sm rounded-full size-8 grid place-content-center"
+          >
+            <XMarkIcon className="text-white size-4" />
+          </button>
+        </div>
+        {children}
+      </motion.dialog>
+    </>
   );
 }
