@@ -68,7 +68,7 @@ export default function Home() {
                 name="slika"
                 value={photo}
                 onChange={handleImageChange}
-                className="col-start-1 row-start-1 w-full appearance-none py-1.5 pr-10 pl-3 text-base text-neutral-600 focus:outline-none"
+                className="peer col-start-1 row-start-1 w-full appearance-none py-1.5 pr-10 pl-3 text-base text-neutral-600 focus:outline-none"
               >
                 <option value="1">Slika 1</option>
                 <option value="2">Slika 2</option>
@@ -86,7 +86,7 @@ export default function Home() {
                 fill="currentColor"
                 data-slot="icon"
                 aria-hidden="true"
-                className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-300 sm:size-4 dark:text-gray-400"
+                className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-300 sm:size-4 peer-focus:text-blue-500"
               >
                 <path
                   d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
